@@ -20,8 +20,8 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
         <Header />
-        <MainContent></MainContent>
-        <Footer></Footer>
+        <MainContent />
+        <Footer />
       </div>
       <h1>Vite + React</h1>
       <WelcomeMessage />
