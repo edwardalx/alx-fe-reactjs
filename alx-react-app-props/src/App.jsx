@@ -12,12 +12,12 @@ import UserContext from './components/UserContext'
 
 function App() {
   const userData = { name: "Jane Doe", email: "jane.doe@example.com" };
-
+ const props = {name:"Alice", age:"25", bio:"Loves hiking and photography"}
 
   return (
     <>
         <Header />
-        <UserProfile name="Alice" age="25" bio="Loves hiking and photography" />
+        <UserContext.Provider value={props}><UserProfile /></UserContext.Provider>
         <UserContext.Provider value={userData}><ProfilePage /></UserContext.Provider> 
         <MainContent />
         <Footer />
