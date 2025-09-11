@@ -6,7 +6,8 @@
     const recipes = useRecipeStore(state => state.recipes);
 
     const handleDetails = (recipe) => {
-      console.log("Details for:", recipe);
+      // console.log("Details for:", recipe);
+      RecipeDetails(recipe.id)
     }
 
     return (
