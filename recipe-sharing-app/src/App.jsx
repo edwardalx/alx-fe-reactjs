@@ -4,13 +4,17 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import AddRecipeForm from './components/AddRecipeForm'
 import RecipeList from './components/RecipeList'
+import HomePage from './pages/Home'
+import { Routes, Route } from 'react-router-dom'
+
 
 function App() {
 
   return (
     <>
-    <AddRecipeForm />
-    <RecipeList />
+    <Routes>
+      <Route path = "/" element = {<HomePage/>} />
+    </Routes>
     </>
   )
 }
