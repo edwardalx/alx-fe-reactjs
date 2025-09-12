@@ -7,7 +7,7 @@ import RecipeList from './components/RecipeList'
 import HomePage from './pages/Home'
 import RecipeDetails from './components/RecipeDetails'
 
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, BrowserRouter } from 'react-router-dom'
 
 
 function App() {
