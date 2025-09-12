@@ -27,7 +27,7 @@ export default function EditRecipeForm({recipe}) {
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Enter recipe description"
         />
-        <input type="submit" value={"Save Changes"} />
+      <button type="submit"> Save Changes</button>
       </form>
     </>
   );
