@@ -3,8 +3,9 @@
   import EditRecipeForm from './EditRecipeForm';
   import DeleteRecipeButton from './DeleteRecipeButton';
 
-  const RecipeDetails = ({ recipeId }) => {
-    const recipe = useRecipeStore(state => state.recipes.find(recipe => recipe.id === recipeId)
+  const RecipeDetails = () => {
+    const { recipeId } = useParams();
+    const recipe = useRecipeStore(state => state.recipes.find(recipe => recipe.id === Number(recipeId))
     );
 
     return (

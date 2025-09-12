@@ -5,6 +5,7 @@ import './App.css'
 import AddRecipeForm from './components/AddRecipeForm'
 import RecipeList from './components/RecipeList'
 import HomePage from './pages/Home'
+import RecipeDetails from './components/RecipeDetails'
 import { Routes, Route } from 'react-router-dom'
 
 
@@ -14,6 +15,7 @@ function App() {
     <>
     <Routes>
       <Route path = "/" element = {<HomePage/>} />
+      <Route path='/detail/:id' element = {<RecipeDetails />}/>
     </Routes>
     </>
   )

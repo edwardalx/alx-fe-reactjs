@@ -1,13 +1,15 @@
 // RecipeList component
   import { useRecipeStore } from './recipeStore';
   import RecipeDetails from './RecipeDetails';
+  import { useNavigate } from 'react-router-dom';
 
   const RecipeList = () => {
     const recipes = useRecipeStore(state => state.recipes);
+    const navigate = useNavigate();
 
-    const handleDetails = (recipe) => {
+    const handleDetails = (id) => {
       // console.log("Details for:", recipe);
-      RecipeDetails(recipe.id)
+      navigate(`/details/${id}`)
     }
 
     return (
@@ -16,7 +18,7 @@
           <div key={recipe.id} >
             <h3>{recipe.title}</h3>
             <p>{recipe.description}</p>
-            <p onClick={() => handleDetails(recipe)}>Click here fore detail</p>
+            <p style={{color:'red', cursor:'pointer'}} onClick={() => handleDetails(recipe.id)}>Click here fore detail</p>
           </div>
         ))}
       </div>
