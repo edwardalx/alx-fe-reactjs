@@ -17,7 +17,7 @@ export const useRecipeStore = create((set) => ({
     addFavorite: (newRecipe) => set((state) => ({ favorites: [...state.favorites, newRecipe.id] })),
     removeFavorite:(recipeToRemove) => set((state) => ({favorites: state.favorites.filter(recipe => recipe.id !== recipeToRemove.id)})),
 
-    recommend: [],
+    recommendations: [],
     addRecommend: (newRecipe) => set((state) => ({ Recommend: [...state.Recommend, newRecipe] })),
     removeRecommend:(recipeToRemove) => set((state) => ({Recommend: state.Recommend.filter(recipe => recipe.id !== recipeToRemove.id)}))
 }));
