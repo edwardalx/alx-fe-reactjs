@@ -14,8 +14,15 @@ export const useRecipeStore = create((set) => ({
       recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase()))
     })),
     favorites: [],
-    addFavorite: (newRecipe) => set((state) => ({ favorites: [...state.favorites, newRecipe.id] })),
-    removeFavorite:(recipeToRemove) => set((state) => ({favorites: state.favorites.filter(recipe => recipe.id !== recipeToRemove.id)})),
+addFavorite: (recipe) =>
+  set((state) => ({
+    favorites: [...state.favorites, recipe.id], // store only the ID
+  })),
+removeFavorite: (recipe) =>
+  set((state) => ({
+    favorites: state.favorites.filter((id) => id !== recipe.id), // remove by ID
+  })),
+
 
     recommendations: [],
     addRecommend: (newRecipe) => set((state) => ({ Recommend: [...state.Recommend, newRecipe] })),

@@ -1,55 +1,51 @@
 // RecipeList component
 import { useRecipeStore } from "./recipeStore";
-import RecipeDetails from "./RecipeDetails";
-import { useNavigate } from "react-router-dom";
-import SearchBar from "./SearchBar";
 import { Link } from "react-router-dom";
+import SearchBar from "./SearchBar";
 
 const RecipeList = () => {
   const recipes = useRecipeStore((state) => state.recipes);
   const filteredRecipes = useRecipeStore((state) => state.filteredRecipes);
-  const [addFav, setAddFav] = useState(false)
+  const favorites = useRecipeStore((state) => state.favorites);
   const addFavorite = useRecipeStore((state) => state.addFavorite);
-  const removeFavorite = useRecipeStore((state) => state.removeFavorite)
-  const favorites = useRecipeStore((state) => state.favorites); // store of favorite IDs
-  // const navigate = useNavigate();
-  let finalRecipes;
-  filteredRecipes.length !== 0
-    ? (finalRecipes = filteredRecipes)
-    : (finalRecipes = recipes);
-  // const handleDetails = (id) => {
-  //   console.log("Details for:", recipe);
-  //   navigate(`/details/${id}`);
-  // };
-const handleAddFav = (recipe) => {
-  recipe.id in favorites? removeFavorite(recipe) : addFavorite(recipe)
-  setAddFav(!addFav)
-}
+  const removeFavorite = useRecipeStore((state) => state.removeFavorite);
+
+  // Use filtered recipes if available, otherwise all recipes
+  const finalRecipes = filteredRecipes.length !== 0 ? filteredRecipes : recipes;
+
+  // Toggle favorite for a recipe
+  const handleToggleFavorite = (recipe) => {
+    if (favorites.includes(recipe.id)) {
+      removeFavorite(recipe);
+    } else {
+      addFavorite(recipe);
+    }
+  };
 
   return (
     <div>
-      {finalRecipes.map((recipe) => {
-        const isFavorite = favorites.includes(recipe.id); // check if this recipe is favorite
-        return (
-          <div key={recipe.id}>
-            <h3>{recipe.title}</h3>
-            <p>{recipe.description}</p>
-            <p>
-              <Link
-                to={`/details/${recipe.id}`}
-                style={{ color: "red", cursor: "pointer" }}
-              >
-                Click here for details
-              </Link>
-            </p>
-            <div>
-              <button onClick={() => handleToggleFavorite(recipe)}>
-                {isFavorite ? "Remove Favorite" : "Add Favorite"}
-              </button>
-            </div>
+      {finalRecipes.map((recipe) => (
+        <div key={recipe.id}>
+          <h3>{recipe.title}</h3>
+          <p>{recipe.description}</p>
+          <p>
+            <Link
+              to={`/details/${recipe.id}`}
+              style={{ color: "red", cursor: "pointer" }}
+            >
+              Click here for details
+            </Link>
+          </p>
+          <div>
+            <button onClick={() => handleToggleFavorite(recipe)}>
+              {favorites.includes(recipe.id)
+                ? "Remove Favorite"
+                : "Add Favorite"}
+            </button>
           </div>
-        );
-      })}
+        </div>
+      ))}
+
       <div>
         <SearchBar />
         <p>

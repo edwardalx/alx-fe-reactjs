@@ -1,25 +1,34 @@
 import { useRecipeStore } from "./recipeStore";
 
 const FavoritesList = () => {
-    const favorites = useRecipeStore((state) =>state.favorites);
-//   const favorites = useRecipeStore((state) =>
-//     state.favorites.map((id) =>
-//       state.recipes.find((recipe) => recipe.id === id)
-//     ));
+      // Get raw state from the store
+  const favoriteIds = useRecipeStore((state) => state.favorites);
+  const recipes = useRecipeStore((state) => state.recipes);
+//   const favorites = 
+//     favoriteIds.map((id) =>
+//       recipes.find((recipe) => recipe.id === id)
+//     );
 // const favorites = useRecipeStore((state) =>
 //   state.recipes.filter((recipe) => state.favorites.includes(recipe.id))
 // );
+  const favorites = favoriteIds
+    .map((id) => recipes.find((recipe) => recipe.id === id))
+    .filter(Boolean); // removes undefined in case a recipe was deleted
 
 
   return (
     <div>
       <h2>My Favorites</h2>
-      {favorites.map((recipe) => (
-        <div key={recipe.id}>
-          <h3>{recipe.title}</h3>
-          <p>{recipe.description}</p>
-        </div>
-      ))}
+      {favorites.length === 0 ? (
+        <p>No favorite recipes yet.</p>
+      ) : (
+        favorites.map((recipe) => (
+          <div key={recipe.id}>
+            <h3>{recipe.title}</h3>
+            <p>{recipe.description}</p>
+          </div>
+        ))
+      )}
     </div>
   );
 };
