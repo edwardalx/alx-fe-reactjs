@@ -3,6 +3,8 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import axios from "axios"
 import './App.css'
+// import { GITHUB_API_KEY } from './services/githubService'
+const GITHUB_API_KEY = import.meta.env.VITE_APP_GITHUB_API_KEY;
 
 function App() {
   const [count, setCount] = useState([])
@@ -12,6 +14,7 @@ function App() {
      setCount(response.data)
     }
     getData()
+    console.log("My GitHub API Key:", GITHUB_API_KEY); // Works in dev
   },[])
   
   
@@ -32,7 +35,6 @@ function App() {
       ) : (
         <p>Loading...</p>
       )}
-      {console.log(count)}
     </>
   )
 }
