@@ -1,33 +1,38 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
+import axios from "axios"
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [count, setCount] = useState([])
+  useEffect( ()=>{
+    const getData = async() =>{
+      const response = await axios.get("https://api.github.com/users/octocat");
+     setCount(response.data)
+    }
+    getData()
+  },[])
+  
+  
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <h1>GitHub User</h1>
+      {count ? (
+        <>
+          <p><strong>countname:</strong> {count.login}</p>
+          <p><strong>ID:</strong> {count.id}</p>
+          <p>
+            <strong>Profile URL:</strong>{" "}
+            <a href={count.html_url} target="_blank" rel="noreferrer">
+              {count.html_url}
+            </a>
+          </p>
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
+      {console.log(count)}
     </>
   )
 }
