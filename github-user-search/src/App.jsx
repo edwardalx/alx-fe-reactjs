@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg'
 import axios from "axios"
 import './App.css'
 // import { GITHUB_API_KEY } from './services/githubService'
-const GITHUB_API_KEY = import.meta.env.VITE_APP_GITHUB_API_KEY;
+// const GITHUB_API_KEY = import.meta.env.VITE_APP_GITHUB_API_KEY;
 
 function App() {
   const [count, setCount] = useState([])
