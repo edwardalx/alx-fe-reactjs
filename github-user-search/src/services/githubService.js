@@ -9,7 +9,7 @@ const githubApi = axios.create({
         },
 });
 
- const getRepos = async (username) => {
+ const fetchUserData = async (username) => {
   try {
     if (username.length < 2){console.log("No username")}
     else{const response = await githubApi.get(`${username.trim()}`);
@@ -21,4 +21,4 @@ const githubApi = axios.create({
   }
 };
 
-export default {GITHUB_API_KEY, getRepos}
+export default {GITHUB_API_KEY, fetchUserData}

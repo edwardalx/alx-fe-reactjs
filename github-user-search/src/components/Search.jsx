@@ -24,7 +24,7 @@ const handleSubmit = async(e)=>{
      if (!username){
       return
     }
-  let response = await githubService.getRepos(username)
+  let response = await githubService.fetchUserData(username)
   fetchData([response]);
     // console.log(`Form ready data: ${JSON.stringify(githubData)}`)
     console.log("Form ready data:", githubData)
