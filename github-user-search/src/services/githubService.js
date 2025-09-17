@@ -1,20 +1,24 @@
 import axios from "axios";
-export const GITHUB_API_KEY = import.meta.env.VITE_APP_GITHUB_API_KEY;
+const GITHUB_API_KEY = import.meta.env.VITE_APP_GITHUB_API_KEY;
 
 
 const githubApi = axios.create({
-  baseURL: "https://api.github.com",
+  baseURL: "https://api.github.com/users/",
   headers: {
-    Authorization: `token ${import.meta.env.VITE_GITHUB_TOKEN}`,
-  },
+          Authorization: `Bearer ${GITHUB_API_KEY}`,
+        },
 });
 
-export const getRepos = async () => {
+ const getRepos = async (username) => {
   try {
-    const response = await githubApi.get("/user/repos");
-    return response.data;
+    if (username.length < 2){console.log("No username")}
+    else{const response = await githubApi.get(`${username.trim()}`);
+    return response.data;}
+    
   } catch (error) {
     console.error("GitHub API error:", error.response?.status, error.message);
     return [];
   }
 };
+
+export default {GITHUB_API_KEY, getRepos}

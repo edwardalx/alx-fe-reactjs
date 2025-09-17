@@ -1,3 +1,14 @@
-import { useState } from "react";
+import React from 'react'
+import { Link } from 'react-router-dom'
 
-useState
+export default function Header() {
+  return (
+    <div>
+        <div className="nav-links">
+            <Link to="/">My Logo</Link>
+            <Link to="/"style={{marginLeft:"auto"}}>Home</Link>
+            <Link to="/">Login</Link>
+        </div>
+    </div>
+  )
+}

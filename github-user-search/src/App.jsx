@@ -2,25 +2,31 @@ import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import axios from "axios"
-import './App.css'
-// import { GITHUB_API_KEY } from './services/githubService'
+// import './App.css'
+import githubService from './services/githubService'
+import Header from './components/Header'
+import Home from './components/Home'
+import {Route, Routes} from "react-router-dom"
+import './css/base-style.css'
 // const GITHUB_API_KEY = import.meta.env.VITE_APP_GITHUB_API_KEY;
 
 function App() {
-  const [count, setCount] = useState([])
-  useEffect( ()=>{
-    const getData = async() =>{
-      const response = await axios.get("https://api.github.com/users/octocat");
-     setCount(response.data)
-    }
-    getData()
-    console.log("My GitHub API Key:", GITHUB_API_KEY); // Works in dev
-  },[])
+  // const [count, setCount] = useState([])
+  // useEffect( ()=>{
+  //   const getData = async() =>{
+  //     const response = await axios.get("https://api.github.com/users/octocat");
+  //    setCount(response.data)
+  //   }
+  //   getData()
+  //   console.log("My GitHub API Key:", githubService.GITHUB_API_KEY); // Works in dev
+  // },[])
   
   
   return (
     <>
-    <h1>GitHub User</h1>
+    <Routes>
+      <Route path ="/" element = {<Home />} />
+    {/* <h1>GitHub User</h1>
       {count ? (
         <>
           <p><strong>countname:</strong> {count.login}</p>
@@ -34,7 +40,9 @@ function App() {
         </>
       ) : (
         <p>Loading...</p>
-      )}
+      )} */}
+    </Routes>
+    
     </>
   )
 }
