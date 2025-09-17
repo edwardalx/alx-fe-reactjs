@@ -1,7 +1,7 @@
 import React from 'react'
 import { useStore } from '../useStore/gitHubSrore'
 import githubService from '../services/githubService'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 function SearchForm() {
 const username = useStore(state => state.username)

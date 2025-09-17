@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from './Header'
-import SearchForm from './SearchForm'
+import SearchForm from './Search'
 
 export default function Home() {
   return (
