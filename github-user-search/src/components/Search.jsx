@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useStore } from "../useStore/gitHubSrore";
 import githubService from "../services/githubService";
-import { useEffect, useState } from "react";
 
 function SearchForm() {
   const username = useStore((state) => state.username);
@@ -9,26 +8,30 @@ function SearchForm() {
   const githubData = useStore((state) => state.githubData);
   const fetchData = useStore((state) => state.fetchData);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  // useEffect(()=>{
-  //   const getData = async() => {
-  //     if (!username){
-  //       return
-  //     }
-  //   let response = await githubService.getRepos(username)
-  //   fetchData([response]);
-  // }
-  // getData()
-  // }, [])
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!username) {
-      return;
+    if (!username) return;
+
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await githubService.fetchUserData(username);
+
+      if (!response || !response.login) {
+        setError("Looks like we can't find the user");
+        fetchData({}); // clear old data
+      } else {
+        fetchData(response);
+        console.log("Form ready data:", response);
+      }
+    } catch (err) {
+      setError("Something went wrong. Try again later.");
+    } finally {
+      setLoading(false);
     }
-    let response = await githubService.fetchUserData(username);
-    fetchData(response);
-    console.log("Form ready data:", githubData);
-    githubData.length === 0 && setError("Looks like we cant find the user");
   };
 
   return (
@@ -40,21 +43,26 @@ function SearchForm() {
           id="search"
           placeholder="input search here"
           value={username}
-          onChange={(e) => {
-            setUsername(e.target.value);
-          }}
+          onChange={(e) => setUsername(e.target.value)}
         />
         <button className="button" type="submit">
           Search
         </button>
       </form>
+
       <div>
-        <h2>User datial</h2>
-        {error.length !== 0 && <p>{error}</p>}
-        {githubData.length !== 0 && (
+        <h2>User detail</h2>
+        {loading && <p>Loading...</p>}
+        {error && <p>{error}</p>}
+
+        {githubData.login && !loading && (
           <>
             <p>avatar_url: {githubData.avatar_url}</p>
-            <img src={githubData.avatar_url} alt="avatar_url"style={{width:'50px'}}/>
+            <img
+              src={githubData.avatar_url}
+              alt="avatar"
+              style={{ width: "50px" }}
+            />
             <p>login: {githubData.login}</p>
           </>
         )}
