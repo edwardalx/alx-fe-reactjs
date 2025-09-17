@@ -1,45 +1,66 @@
-import React from 'react'
-import { useStore } from '../useStore/gitHubSrore'
-import githubService from '../services/githubService'
-import { useEffect, useState } from 'react'
+import React from "react";
+import { useStore } from "../useStore/gitHubSrore";
+import githubService from "../services/githubService";
+import { useEffect, useState } from "react";
 
 function SearchForm() {
-const username = useStore(state => state.username)
-const setUsername = useStore(state => state.setUsername)
-const githubData = useStore(state => state.githubData)
-const fetchData =useStore(state => state.fetchData)
+  const username = useStore((state) => state.username);
+  const setUsername = useStore((state) => state.setUsername);
+  const githubData = useStore((state) => state.githubData);
+  const fetchData = useStore((state) => state.fetchData);
+  const [error, setError] = useState("");
 
-// useEffect(()=>{
-//   const getData = async() => {
-//     if (!username){
-//       return
-//     }
-//   let response = await githubService.getRepos(username)
-//   fetchData([response]);
-// }
-// getData()
-// }, [])
-const handleSubmit = async(e)=>{
-  e.preventDefault()
-     if (!username){
-      return
+  // useEffect(()=>{
+  //   const getData = async() => {
+  //     if (!username){
+  //       return
+  //     }
+  //   let response = await githubService.getRepos(username)
+  //   fetchData([response]);
+  // }
+  // getData()
+  // }, [])
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!username) {
+      return;
     }
-  let response = await githubService.fetchUserData(username)
-  fetchData([response]);
-    // console.log(`Form ready data: ${JSON.stringify(githubData)}`)
-    console.log("Form ready data:", githubData)
-
-}
+    let response = await githubService.fetchUserData(username);
+    fetchData(response);
+    console.log("Form ready data:", githubData);
+    githubData.length === 0 && setError("Looks like we cant find the user");
+  };
 
   return (
-    <div className='ceter-text'>
-      <form onSubmit={handleSubmit} className='center-form'>
+    <div className="ceter-text">
+      <form onSubmit={handleSubmit} className="center-form">
         <label htmlFor="search">Search</label>
-        <input type="text" id='search' placeholder='input search here' value={username} onChange={(e)=>{setUsername(e.target.value)}}/>
-        <button className="button" type="submit">Search</button>
+        <input
+          type="text"
+          id="search"
+          placeholder="input search here"
+          value={username}
+          onChange={(e) => {
+            setUsername(e.target.value);
+          }}
+        />
+        <button className="button" type="submit">
+          Search
+        </button>
       </form>
+      <div>
+        <h2>User datial</h2>
+        {error.length !== 0 && <p>{error}</p>}
+        {githubData.length !== 0 && (
+          <>
+            <p>avatar_url: {githubData.avatar_url}</p>
+            <img src={githubData.avatar_url} alt="avatar_url"style={{width:'50px'}}/>
+            <p>login: {githubData.login}</p>
+          </>
+        )}
+      </div>
     </div>
-  )
+  );
 }
 
-export default SearchForm
+export default SearchForm;

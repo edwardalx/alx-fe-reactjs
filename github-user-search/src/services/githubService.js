@@ -5,7 +5,8 @@ const GITHUB_API_KEY = import.meta.env.VITE_APP_GITHUB_API_KEY;
 const githubApi = axios.create({
   baseURL: "https://api.github.com/users/",
   headers: {
-          Authorization: `Bearer ${GITHUB_API_KEY}`,
+          // Accept: 'application/vnd.github+json',
+          // Authorization: `Bearer ${GITHUB_API_KEY}`,
         },
 });
 
