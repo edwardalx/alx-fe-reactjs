@@ -9,6 +9,8 @@ function SearchForm() {
   const fetchData = useStore((state) => state.fetchData);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [location, setLocation] = useState("");
+  const [repository, setRepository] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,6 +18,7 @@ function SearchForm() {
 
     setLoading(true);
     setError("");
+    setUsername("");
 
     try {
       const response = await githubService.fetchUserData(username);
@@ -37,19 +40,47 @@ function SearchForm() {
   return (
     <div className="ceter-text">
       <form onSubmit={handleSubmit} className="center-form">
-        <label htmlFor="search">Search</label>
-        <input
-          type="text"
-          id="search"
-          placeholder="input search here"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+        {/* Added mb-4 for gap between form groups */}
+        <div className="horizontal-label mb-4">
+          <label htmlFor="search" className="mb-2">
+            Search
+          </label>
+          <input
+            type="text"
+            id="search"
+            placeholder="input search here"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="mb-1 placeholder-gray-400"
+          />
+        </div>
+
+        <div className="horizontal-label mb-4">
+          <label htmlFor="search">Location</label>
+          <input
+            type="text"
+            id="location"
+            placeholder="input location here"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+          />
+        </div>
+
+        <div className="horizontal-label mb-4">
+          <label htmlFor="repositories">Repository</label>
+          <input
+            type="number"
+            id="repositories"
+            placeholder="input repository here"
+            value={repository}
+            onChange={(e) => setRepository(e.target.value)}
+          />
+        </div>
+
         <button className="button" type="submit">
           Search
         </button>
       </form>
-
       <div>
         <h2>User detail</h2>
         {loading && <p>Loading...</p>}

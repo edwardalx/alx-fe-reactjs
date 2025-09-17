@@ -11,7 +11,7 @@ const fetchUserData = async (username) => {
       return null;
     }
 
-    const response = await githubApi.get(username.trim());
+    const response = await githubApi.get(`${username.trim()}`);
     return response.data;
   } catch (error) {
     console.error("GitHub API error:", error.response?.status, error.message);
