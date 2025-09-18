@@ -19,21 +19,22 @@ const fetchUserData = async (username) => {
   }
 };
 
-const getQueryParam = async(username, location, repo)=>{
+const getQueryParam = async(username, location, minRepos)=>{
 let query
 if (username){query = username}
 if (location){query = `${query}+location:${location}`}
-if (repo){query = `${query}+repos:>=${repo}`}
+if (minRepos){query = `${query}+repos:>=${minRepos}`}
 
 try {
   !username||username.trim().length < 2 && console.log("No username provided");
   const response = await githubApi.get(`search/users?q=${query.trim()}`);
+  console.log(response.url)
   return response.data
 } catch (error) {
   console.error(`Request was not successful: `,error.response.status, error.message)
 }
 
-
+// "https://api.github.com/search/users?q"
 }
 
 export  default { fetchUserData, getQueryParam };
