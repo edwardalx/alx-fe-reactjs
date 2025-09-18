@@ -51,7 +51,7 @@ function SearchForm() {
             placeholder="input search here"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="mb-1 placeholder-gray-400"
+            className="mb-1 placeholder-gray-400 text-white"
           />
         </div>
 
