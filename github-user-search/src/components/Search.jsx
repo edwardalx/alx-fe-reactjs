@@ -11,6 +11,7 @@ function SearchForm() {
   const [loading, setLoading] = useState(false);
   const [location, setLocation] = useState("");
   const [repository, setRepository] = useState("");
+  const [queryResData, setQueryResData] = useState([])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,7 +19,7 @@ function SearchForm() {
 
     setLoading(true);
     setError("");
-    setUsername("");
+    // setUsername("");
 
     try {
       const response = await githubService.fetchUserData(username);
@@ -37,9 +38,29 @@ function SearchForm() {
     }
   };
 
+ const handleParamReq = async(e) => {
+  e.preventDefault()
+  setUsername("")
+ setLocation("")
+  setRepository("")
+  setLoading(true)
+  try {
+    if(!username){setError("No username provided")}
+     let response = await githubService.getQueryParam(username,location,repository);
+    if (!response.items){setError("Looks like notong returned")}
+      setQueryResData(response.items)
+      console.log(response.total_count)
+  } catch (error) {
+    console.error("handle param request:",error.response, error.message)
+  }
+  finally{setLoading(false)}
+
+
+ }
+
   return (
     <div className="ceter-text">
-      <form onSubmit={handleSubmit} className="center-form">
+      <form onSubmit={handleParamReq} className="center-form">
         {/* Added mb-4 for gap between form groups */}
         <div className="horizontal-label mb-4">
           <label htmlFor="search" className="mb-2">
@@ -51,7 +72,7 @@ function SearchForm() {
             placeholder="input search here"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="mb-1 placeholder-gray-400 text-white"
+            className="mb-1 placeholder-gray-400"
           />
         </div>
 
@@ -95,6 +116,16 @@ function SearchForm() {
               style={{ width: "50px" }}
             />
             <p>login: {githubData.login}</p>
+          </>
+        )}
+        {queryResData.length>0 && !loading && (
+          <>
+           {...queryResData.map(x => 
+           (<div key={x.id}>
+            <p>Login: {x.login}</p>
+            <img src={x.avatar_url} alt="avatar-url" />
+           </div>)
+           )}
           </>
         )}
       </div>
