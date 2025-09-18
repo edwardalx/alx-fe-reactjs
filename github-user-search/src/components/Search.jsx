@@ -11,7 +11,7 @@ function SearchForm() {
   const [loading, setLoading] = useState(false);
   const [location, setLocation] = useState("");
   const [repository, setRepository] = useState("");
-  const [queryResData, setQueryResData] = useState([])
+  const [queryResData, setQueryResData] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,25 +38,32 @@ function SearchForm() {
     }
   };
 
- const handleParamReq = async(e) => {
-  e.preventDefault()
-  setUsername("")
- setLocation("")
-  setRepository("")
-  setLoading(true)
-  try {
-    if(!username){setError("No username provided")}
-     let response = await githubService.getQueryParam(username,location,repository);
-    if (!response.items){setError("Looks like notong returned")}
-      setQueryResData(response.items)
-      console.log(response.total_count)
-  } catch (error) {
-    console.error("handle param request:",error.response, error.message)
-  }
-  finally{setLoading(false)}
-
-
- }
+  const handleParamReq = async (e) => {
+    e.preventDefault();
+    setUsername("");
+    setLocation("");
+    setRepository("");
+    setLoading(true);
+    try {
+      if (!username) {
+        setError("No username provided");
+      }
+      let response = await githubService.getQueryParam(
+        username,
+        location,
+        repository
+      );
+      if (!response.items) {
+        setError("Looks like notong returned");
+      }
+      setQueryResData(response.items);
+      console.log(response.total_count);
+    } catch (error) {
+      console.error("handle param request:", error.response, error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="ceter-text">
@@ -118,14 +125,19 @@ function SearchForm() {
             <p>login: {githubData.login}</p>
           </>
         )}
-        {queryResData.length>0 && !loading && (
+        {queryResData.length > 0 && !loading && (
           <>
-           {...queryResData.map(x => 
-           (<div key={x.id}>
-            <p>Login: {x.login}</p>
-            <img src={x.avatar_url} alt="avatar-url" />
-           </div>)
-           )}
+            {...queryResData.map((x) => (
+              <div key={x.id}>
+                <p>Login: {x.login}</p>
+                <p>Html Url: {x.html_url}</p>
+                <img
+                  src={x.avatar_url}
+                  alt="avatar-url"
+                  style={{ width: "50px" }}
+                />
+              </div>
+            ))}
           </>
         )}
       </div>
