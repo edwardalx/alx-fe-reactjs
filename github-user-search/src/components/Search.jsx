@@ -57,7 +57,7 @@ function SearchForm() {
       }
       setQueryResData(response.items);
     } catch (error) {
-      console.error("handle param request:", error.response, error.message);
+      
     } finally {
       setLoading(false);
     }
