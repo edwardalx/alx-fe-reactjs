@@ -24,7 +24,7 @@ function SearchForm() {
       const response = await githubService.fetchUserData(username);
 
       if (!response || !response.login) {
-        setError("Looks like we can’t find the user");
+        setError("Looks like we cant find the user");
         fetchData({});
       } else {
         fetchData(response);
