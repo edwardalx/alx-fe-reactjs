@@ -7,7 +7,7 @@ const githubApi = axios.create({
 const fetchUserData = async (username) => {
   try {
     if (!username || username.trim().length < 2) {
-      console.log("No username provided");
+      console.error("No username provided");
       return null;
     }
 

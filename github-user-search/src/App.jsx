@@ -18,7 +18,6 @@ function App() {
   //    setCount(response.data)
   //   }
   //   getData()
-  //   console.log("My GitHub API Key:", githubService.GITHUB_API_KEY); // Works in dev
   // },[])
   
   

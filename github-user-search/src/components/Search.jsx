@@ -29,7 +29,6 @@ function SearchForm() {
         fetchData({}); // clear old data
       } else {
         fetchData(response);
-        console.log("Form ready data:", response);
       }
     } catch (err) {
       setError("Something went wrong. Try again later.");
@@ -57,7 +56,6 @@ function SearchForm() {
         setError("Looks like notong returned");
       }
       setQueryResData(response.items);
-      console.log(response.total_count);
     } catch (error) {
       console.error("handle param request:", error.response, error.message);
     } finally {
