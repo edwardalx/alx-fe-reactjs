@@ -26,7 +26,7 @@ if (location){query = `${query}+location:${location}`}
 if (minRepos){query = `${query}+repos:>=${minRepos}`}
 
 try {
-  !username||username.trim().length < 2 && console.log("No username provided");
+  !username||username.trim().length < 2;
   const response = await githubApi.get(`search/users?q=${query.trim()}`);
   console.log(response.url)
   return response.data

@@ -19,14 +19,13 @@ function SearchForm() {
 
     setLoading(true);
     setError("");
-    // setUsername("");
 
     try {
       const response = await githubService.fetchUserData(username);
 
       if (!response || !response.login) {
-        setError("Looks like we cant find the user");
-        fetchData({}); // clear old data
+        setError("Looks like we can’t find the user");
+        fetchData({});
       } else {
         fetchData(response);
       }
@@ -39,34 +38,37 @@ function SearchForm() {
 
   const handleParamReq = async (e) => {
     e.preventDefault();
-    setUsername("");
-    setLocation("");
-    setRepository("");
     setLoading(true);
+    setError("");
+
     try {
       if (!username) {
         setError("No username provided");
+        return;
       }
-      let response = await githubService.getQueryParam(
+
+      const response = await githubService.getQueryParam(
         username,
         location,
         repository
       );
-      if (!response.items) {
-        setError("Looks like notong returned");
+
+      if (!response.items || response.items.length === 0) {
+        setError("Looks like nothing returned");
+        setQueryResData([]);
+      } else {
+        setQueryResData(response.items);
       }
-      setQueryResData(response.items);
     } catch (error) {
-      
+      setError("Something went wrong with query search");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="ceter-text">
+    <div className="center-text">
       <form onSubmit={handleParamReq} className="center-form">
-        {/* Added mb-4 for gap between form groups */}
         <div className="horizontal-label mb-4">
           <label htmlFor="search" className="mb-2">
             Search
@@ -82,7 +84,7 @@ function SearchForm() {
         </div>
 
         <div className="horizontal-label mb-4">
-          <label htmlFor="search">Location</label>
+          <label htmlFor="location">Location</label>
           <input
             type="text"
             id="location"
@@ -95,7 +97,7 @@ function SearchForm() {
         <div className="horizontal-label mb-4">
           <label htmlFor="repositories">Repository</label>
           <input
-            type="number"
+            type="text"
             id="repositories"
             placeholder="input repository here"
             value={repository}
@@ -107,6 +109,7 @@ function SearchForm() {
           Search
         </button>
       </form>
+
       <div>
         <h2>User detail</h2>
         {loading && <p>Loading...</p>}
@@ -123,9 +126,10 @@ function SearchForm() {
             <p>login: {githubData.login}</p>
           </>
         )}
+
         {queryResData.length > 0 && !loading && (
           <>
-            {...queryResData.map((x) => (
+            {queryResData.map((x) => (
               <div key={x.id}>
                 <p>Login: {x.login}</p>
                 <p>Html Url: {x.html_url}</p>
