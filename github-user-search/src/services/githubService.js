@@ -31,7 +31,7 @@ export const getQueryParam = async (username, location, minRepos) => {
 
   try {
     const response = await githubApi.get(`search/users?q=${query}`);
-    console.error("GitHub request URL:", response.config?.url);
+    console.log("GitHub request URL:", response.config?.url);
     return response.data;
   } catch (error) {
     console.error("Request was not successful:", error.response?.status, error.message);
