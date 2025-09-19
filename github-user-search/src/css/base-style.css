@@ -5,12 +5,13 @@ body{
     max-width: 100vw;
     max-height: 100vh;
 }
-main, .center-text{
+main, .center-text, .user-detail{
     display: flex;
     flex-direction: column;
     align-items: center;
     padding:20px 0;
 }
+
 .nav-links{
     display: flex;
     justify-content: space-between;

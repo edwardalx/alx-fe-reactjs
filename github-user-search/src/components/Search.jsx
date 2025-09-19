@@ -53,7 +53,7 @@ function SearchForm() {
         repository
       );
       if (!response.items) {
-        setError("Looks like notong returned");
+        setError("Looks like noting returned");
       }
       setQueryResData(response.items);
     } catch (error) {
@@ -64,7 +64,7 @@ function SearchForm() {
   };
 
   return (
-    <div className="ceter-text">
+    <div className="center-text">
       <form onSubmit={handleParamReq} className="center-form">
         {/* Added mb-4 for gap between form groups */}
         <div className="horizontal-label mb-4">
@@ -107,7 +107,7 @@ function SearchForm() {
           Search
         </button>
       </form>
-      <div>
+      <div className="user-detail ">
         <h2>User detail</h2>
         {loading && <p>Loading...</p>}
         {error && <p>{error}</p>}
