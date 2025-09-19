@@ -4,7 +4,7 @@ const githubApi = axios.create({
   baseURL: "https://api.github.com/",
 });
 
-const fetchUserData = async (username) => {
+export const fetchUserData = async (username) => {
   try {
     if (!username || username.trim().length < 2) {
       console.error("No username provided");
@@ -15,26 +15,26 @@ const fetchUserData = async (username) => {
     return response.data;
   } catch (error) {
     console.error("GitHub API error:", error.response?.status, error.message);
-    return null; // return null instead of []
+    return null;
   }
 };
 
-const getQueryParam = async(username, location, minRepos)=>{
-let query
-if (username){query = username}
-if (location){query = `${query}+location:${location}`}
-if (minRepos){query = `${query}+repos:>=${minRepos}`}
+export const getQueryParam = async (username, location, minRepos) => {
+  if (!username || username.trim().length < 2) {
+    console.error("No username provided");
+    return null;
+  }
 
-try {
-  !username||username.trim().length < 2;
-  const response = await githubApi.get(`search/users?q=${query.trim()}`);
-  console.log(response.url)
-  return response.data
-} catch (error) {
-  console.error(`Request was not successful: `,error.response.status, error.message)
-}
+  let query = username.trim();
+  if (location) query += `+location:${location}`;
+  if (minRepos) query += `+repos:>=${minRepos}`;
 
-// "https://api.github.com/search/users?q"
-}
-
-export  default { fetchUserData, getQueryParam };
+  try {
+    const response = await githubApi.get(`search/users?q=${query}`);
+    console.error("GitHub request URL:", response.config?.url);
+    return response.data;
+  } catch (error) {
+    console.error("Request was not successful:", error.response?.status, error.message);
+    return null;
+  }
+};
