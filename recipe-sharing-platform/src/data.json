@@ -3,36 +3,120 @@
     "id": 1,
     "title": "Spaghetti Carbonara",
     "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
-    "image": "https://via.placeholder.com/150"
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "200g spaghetti",
+      "100g pancetta",
+      "2 large eggs",
+      "50g Parmesan cheese",
+      "Black pepper"
+    ],
+    "instructions": [
+      "Cook spaghetti according to package instructions.",
+      "Fry pancetta until crispy.",
+      "Beat eggs and mix with grated Parmesan.",
+      "Combine spaghetti with pancetta and remove from heat.",
+      "Quickly stir in egg mixture and season with pepper."
+    ]
   },
   {
     "id": 2,
     "title": "Chicken Tikka Masala",
     "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato based gravy.",
-    "image": "https://via.placeholder.com/150"
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "500g chicken breast",
+      "200g yogurt",
+      "2 tbsp tikka masala spice",
+      "1 onion",
+      "400g canned tomatoes",
+      "100ml cream"
+    ],
+    "instructions": [
+      "Marinate chicken in yogurt and tikka masala spice for 1 hour.",
+      "Grill chicken until cooked through.",
+      "Sauté onion and add canned tomatoes.",
+      "Add grilled chicken to the sauce.",
+      "Stir in cream and simmer for 10 minutes."
+    ]
   },
   {
     "id": 3,
     "title": "Margherita Pizza",
     "summary": "Classic Italian pizza topped with fresh tomatoes, mozzarella, and basil.",
-    "image": "https://source.unsplash.com/150x150/?pizza,margherita"
+    "image": "https://source.unsplash.com/150x150/?pizza,margherita",
+    "ingredients": [
+      "Pizza dough",
+      "100g tomato sauce",
+      "125g mozzarella",
+      "Fresh basil leaves",
+      "Olive oil"
+    ],
+    "instructions": [
+      "Preheat oven to 220°C.",
+      "Spread tomato sauce over rolled out dough.",
+      "Top with mozzarella and basil leaves.",
+      "Drizzle with olive oil.",
+      "Bake for 12-15 minutes until crust is golden."
+    ]
   },
   {
     "id": 4,
     "title": "Caesar Salad",
     "summary": "Crisp romaine lettuce tossed with Caesar dressing, croutons, and Parmesan cheese.",
-    "image": "https://source.unsplash.com/150x150/?salad,caesar"
+    "image": "https://source.unsplash.com/150x150/?salad,caesar",
+    "ingredients": [
+      "1 head romaine lettuce",
+      "50g Parmesan cheese",
+      "Croutons",
+      "Caesar dressing"
+    ],
+    "instructions": [
+      "Chop romaine lettuce and place in a bowl.",
+      "Add croutons and grated Parmesan.",
+      "Drizzle Caesar dressing and toss to combine."
+    ]
   },
   {
     "id": 5,
     "title": "Beef Burger",
     "summary": "Juicy beef patty with lettuce, tomato, cheese, and special sauce in a toasted bun.",
-    "image": "https://source.unsplash.com/150x150/?burger,beef"
+    "image": "https://source.unsplash.com/150x150/?burger,beef",
+    "ingredients": [
+      "1 beef patty",
+      "Burger bun",
+      "Lettuce",
+      "Tomato slices",
+      "Cheddar cheese",
+      "Special sauce"
+    ],
+    "instructions": [
+      "Cook beef patty to desired doneness.",
+      "Toast the burger bun.",
+      "Assemble burger with lettuce, tomato, cheese, and sauce.",
+      "Serve hot."
+    ]
   },
   {
     "id": 6,
     "title": "Chocolate Cake",
     "summary": "Rich and moist chocolate cake with creamy chocolate frosting.",
-    "image": "https://source.unsplash.com/150x150/?chocolate,cake"
+    "image": "https://source.unsplash.com/150x150/?chocolate,cake",
+    "ingredients": [
+      "200g flour",
+      "200g sugar",
+      "100g cocoa powder",
+      "3 eggs",
+      "100g butter",
+      "100ml milk",
+      "Chocolate frosting"
+    ],
+    "instructions": [
+      "Preheat oven to 180°C.",
+      "Mix dry ingredients together.",
+      "Add eggs, melted butter, and milk and stir to combine.",
+      "Pour batter into a greased cake pan.",
+      "Bake for 25-30 minutes and let cool before frosting."
+    ]
   }
 ]
