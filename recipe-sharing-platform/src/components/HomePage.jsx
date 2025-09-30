@@ -12,7 +12,7 @@ export default function HomePage() {
   return (
     <div>
       <div className="text-xl ">HomePage</div>
-      <div className="flex  grid sm:grid-cols-2 md:grid-cols-3 gap-4">  {/*altternatively flex flex-wrap */}
+      <div className="flex grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">  {/*altternatively flex flex-wrap */}
         {data.map((x) => (
           <div key={x.id} >
             <div className="user-profile bg-[rgba(0,0,0,0.2)] sm:p-4 md:p-8 sm:max-w-xs md:max-w-sm mx-auto my-20 rounded-lg shadow-lg hover:shadow-xl hover:p-10 ">
