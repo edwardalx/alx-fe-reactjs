@@ -29,7 +29,7 @@ export default function RecipeDetail() {
     <div className="flex justify-center flex-col gap-8 font-mono">
       <div>RecipeDetail</div>
       {loading && <p>Loading...</p>}
-      <div key={id} className="bg-[rgba(123,178,224,0.3)] text-xl shadow font-bold">
+      <div key={id} className="bg-[rgba(123,178,224,0.3)] text-xl shadow font-bold font-serif italic">
         <Card img={data.image} title={data.ingredients} summary={data.instructions} />
       </div>
     </div>
