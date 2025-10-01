@@ -73,12 +73,12 @@ function AddRecipeForm() {
           />
         </div>
         <div className="flex gap-2 ">
-          <label htmlFor="instructions" className="font-medium">
+          <label htmlFor="preparation-steps" className="font-medium">
             Prepration Steps
           </label>
           <input
             type="text"
-            id="instructions"
+            id="preparation-steps"
             value={instruction}
             onChange={(e) => {
               setInstruction(e.target.value);
