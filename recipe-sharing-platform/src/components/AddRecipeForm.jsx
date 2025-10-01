@@ -5,7 +5,7 @@ function AddRecipeForm() {
   const [title, setTitle] = useState("");
   const [instruction, setInstruction] = useState([]);
   const [ingredients, setIngredients] = useState([]);
-  const [error, setError] = useState(null);
+  const [errors, setErrors] = useState(null);
 
   //   const addInstructionStep = () => {
   //     setCount(count + 1);
@@ -19,9 +19,9 @@ function AddRecipeForm() {
   //   };
   const handleSubmit = (e) => {
     e.preventDefault();
-
+//validate
     if (!title) {
-      setError("Please input tiltle");
+      setErrors("Please input tiltle");
       return
     }
     ingredients.length < 1 && setError("Please add ingredients");
@@ -34,12 +34,12 @@ function AddRecipeForm() {
     setTitle("");
     setIngredients([]);
     setInstruction([]);
-    setError(null);
+    setErrors(null);
   };
   return (
     <>
       <div className="text-lg font-medium">Add Recipe</div>
-      {error && <p className="text-red-600">❗{error}</p>}
+      {errors && <p className="text-red-600">❗{error}</p>}
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-2 justify-center text-left"
