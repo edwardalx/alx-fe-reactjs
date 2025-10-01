@@ -42,7 +42,7 @@ function AddRecipeForm() {
       {errors && <p className="text-red-600">❗{error}</p>}
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-2 justify-center text-left"
+        className="flex flex-col gap-2 justify-center text-left text-md shadow"
       >
         <div className="flex gap-2 ">
           <label htmlFor="title" className="font-medium">
