@@ -5,6 +5,7 @@ import {Routes, Route,BrowserRouter as Router} from "react-router-dom";
 import "./App.css";
 import HomePage from "./components/HomePage";
 import RecipeDetail from "./components/RecipeDetail";
+import AddRecipeForm from "./components/AddRecipeForm";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/recipe/:id" element={<RecipeDetail />} />
+        <Route path="/add" element={<AddRecipeForm />} />
         <Route path="*" element = {<p>Page Not Found</p>} />
       </Routes>
     </Router>

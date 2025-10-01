@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import configData from "../data.json";
 import Card from "./Card";
+import Header from "./Header";
 import { Link } from "react-router-dom";
 
 export default function HomePage() {
@@ -12,6 +13,7 @@ export default function HomePage() {
 
   return (
     <div>
+      <Header />
       <div className="text-xl ">HomePage</div>
       <div className="flex grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">{/*altternatively flex flex-wrap */}
         {data.map((x) => (
