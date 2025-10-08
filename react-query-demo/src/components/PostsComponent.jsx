@@ -8,15 +8,15 @@ import React from "react";
 import axios from "axios";
 
 export default function PostsComponent() {
-    const fetchPost = ()=>{
-         axios("https://jsonplaceholder.typicode.com/posts")
-        .then((res) => res.data)
-        .then((body) => console.log("data : ", body))
-    }
+  const fetchPosts = () => {
+    axios("https://jsonplaceholder.typicode.com/posts")
+      .then((res) => res.data)
+      .then((body) => console.log("data : ", body));
+  };
   const queryClent = useQueryClient();
   const { data, isLoading, error, refetch, isFetching } = useQuery(
     "posts",
-    () => fetchPost
+    () => fetchPosts
   );
   enabled: false;
   const cachedData = queryClent.getQueryData("posts");
@@ -28,7 +28,8 @@ export default function PostsComponent() {
         {isFetching ? "Loading..." : "Fetch Pasts"}
       </button>
       {isLoading && <p>Loading...</p>}
-      {error && <p className="text-red-600">Error loading the data</p>} {/* isError*/}
+      {error && <p className="text-red-600">Error loading the data</p>}{" "}
+      {/* isError*/}
       {data.map((x) => (
         <div key={x.id}>Title: {x.title}</div>
       ))}
