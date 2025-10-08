@@ -16,9 +16,12 @@ export default function PostsComponent() {
   const queryClent = useQueryClient();
   const { data, isLoading, error, refetch, isFetching } = useQuery(
     "posts",
-    () => fetchPosts
-  );
-  enabled: false;
+     fetchPosts,
+{  enabled: false,
+    cacheTime: 1000 * 60 * 10, // 10 minutes
+    staleTime: 1000 * 60 * 1,  // 1 minute
+    refetchOnWindowFocus: false,
+    keepPreviousData: true})
   const cachedData = queryClent.getQueryData("posts");
   console.log("Cached data: ", cachedData);
   return (
