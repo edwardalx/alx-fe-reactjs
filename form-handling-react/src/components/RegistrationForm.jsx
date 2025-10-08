@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 export default function RegistrationForm() {
+  const [error, setError] = useState([])
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -12,6 +13,9 @@ export default function RegistrationForm() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!formData.email){setError("Please enter a username"||null)}
+    if (!formData.username){setError("Please enter username"||null)}
+    if (!formData.password){setError("Please enter password"||null)}
     console.log("Form Data: ", formData);
   };
   return (
@@ -20,6 +24,7 @@ export default function RegistrationForm() {
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">Username</label>
+          <div>{error[1] && <p>{error[1]}</p>}</div>
           <input
             type="text"
             id="username"
