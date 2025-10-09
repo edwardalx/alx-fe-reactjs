@@ -9,6 +9,8 @@ import ProfileSettings from "./components/ProfileSettings";
 import Home from "./components/Home";
 import BlogPost from "./components/Posts";
 import PostDetails from "./components/PostDetails";
+import Login from "./components/Login";
+import PrivateRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -18,8 +20,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/posts" element={<BlogPost />} />
           <Route path="/blog/:id" element={<PostDetails />} />
+            <Route path="/login" element={<Login />} />
 
-          <Route path="/profile" element={<Profile />}>
+          <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>}>
             <Route path="details" element={<ProfileDetails />} />
             <Route path="settings" element={<ProfileSettings />} />
           </Route>
