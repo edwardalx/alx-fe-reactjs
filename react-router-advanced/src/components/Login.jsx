@@ -6,7 +6,7 @@ export default function Login() {
 
   const handleLogin = () => {
     // Simulate login by saving a token
-    localStorage.setItem("authToken", "demo-token");
+    localStorage.setItem("useAuth", "demo-token");
     navigate("/profile", { replace: true }); // redirect after login
   };
 

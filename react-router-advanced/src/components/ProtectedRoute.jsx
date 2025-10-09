@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 
 // Simple function to check if the user is authenticated
 const isAuthenticated = () => {
-  return localStorage.getItem("authToken") !== null;
+  return localStorage.getItem("useAuth") !== null;
 };
 
 export default function PrivateRoute({ children }) {
