@@ -7,7 +7,7 @@ import Profile from "./components/Profile";
 import ProfileDetails from "./components/ProfileDetails";
 import ProfileSettings from "./components/ProfileSettings";
 import Home from "./components/Home";
-import Posts from "./components/Posts";
+import BlogPost from "./components/Posts";
 import PostDetails from "./components/PostDetails";
 
 function App() {
@@ -16,8 +16,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/posts" element={<Posts />} />
-          <Route path="/post/:id" element={<PostDetails />} />
+          <Route path="/posts" element={<BlogPost />} />
+          <Route path="/blog/:id" element={<PostDetails />} />
 
           <Route path="/profile" element={<Profile />}>
             <Route path="details" element={<ProfileDetails />} />
