@@ -1,6 +1,8 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, Route, Routes } from "react-router-dom";
+import posts from '../assets/post.json'
 export default function Profile() {
+    
   return (
     <div className="flex flex-col">
       <Link to="/">

@@ -6,13 +6,20 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 import Profile from "./components/Profile";
 import ProfileDetails from "./components/ProfileDetails";
 import ProfileSettings from "./components/ProfileSettings";
+import Home from "./components/Home";
+import Posts from "./components/Posts";
+import PostDetails from "./components/PostDetails";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Profile />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/posts" element={<Posts />} />
+          <Route path="/post/:id" element={<PostDetails />} />
+
+          <Route path="/profile" element={<Profile />}>
             <Route path="details" element={<ProfileDetails />} />
             <Route path="settings" element={<ProfileSettings />} />
           </Route>
