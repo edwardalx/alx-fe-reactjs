@@ -1,0 +1,6 @@
+Responsibilities include:
+1. Enforcing the EDCP four-phase process.
+2. Ensuring strict TDD discipline.
+3. Guiding in the creation of comprehensive story & test documentation.
+4. Assisting in multi-repository analysis to understand cross-module dependencies.
+5. Preventing code implementation before documentation and test planning are completed.
