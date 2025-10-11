@@ -1,0 +1,37 @@
+This is the tech tasks for the react-todo directory
+Step 1: Setup the Todo List Component
+Create the TodoList Component:
+Initialize the component state with a few todos for demonstration.
+Include methods for adding, toggling, and deleting todos.
+Step 2: Write Tests Using Jest and React Testing Library
+Set Up Testing Environment:
+Ensure you have Jest and React Testing Library installed:
+        npm install --save-dev jest @testing-library/react @testing-library/jest-dom
+Create a __tests__ directory in your src folder to organize your test files.
+Test File Setup:
+
+Create a test file for the TodoList component, e.g., TodoList.test.js, in the __tests__ directory.
+Write Initial Render Test:
+
+Verify that the TodoList component renders correctly.
+Ensure that the initial state (a few demo todos) is rendered.
+Test Adding Todos:
+
+Write a test to verify that a new todo can be added.
+Use fireEvent to simulate user input and form submission.
+Test Toggling Todos:
+
+Write a test to verify that a todo item can be toggled between completed and not completed.
+Test Deleting Todos:
+
+Write a test to verify that a todo item can be deleted.
+Update Scripts in package.json
+
+Edit the scripts section in your package.json
+“scripts”: {
+    “test”: “jest”
+}
+Run Tests:
+
+Run your tests using Jest to ensure they pass:
+     npm test
