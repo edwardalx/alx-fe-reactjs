@@ -1,5 +1,5 @@
 import { render, fireEvent, screen } from '@testing-library/react';
-import TodoItem from '../TodoItem';
+import TodoItem from '../components/TodoItem';
 
 describe('TodoItem Component', () => {
   const mockTodo = {
