@@ -4,11 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "start": "react-scripts start",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "jest"
+    "test": "jest",
+    "eject": "react-scripts eject"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.14",
