@@ -1,5 +1,13 @@
 import { render, fireEvent, screen } from '@testing-library/react';
 import TodoList from '../components/TodoList';
+import React from 'react'
+
+export default function TodoList() {
+  return (
+    <div>TodoList</div>
+  )
+}
+
 
 describe('TodoList Component', () => {
   beforeEach(() => {
