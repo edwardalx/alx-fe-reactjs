@@ -1,30 +1,21 @@
-import { useState } from 'react';
-import TodoItem from './TodoItem';
+import React, { useState } from "react";
 
 const TodoList = () => {
-  const [todos, setTodos] = useState([]);
-  const [inputValue, setInputValue] = useState('');
+  const [todos, setTodos] = useState([
+    { id: 1, text: "Learn React", completed: false },
+    { id: 2, text: "Build Todo App", completed: true },
+  ]);
+  const [newTodo, setNewTodo] = useState("");
 
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
-  };
-
-  const handleAddTodo = (e) => {
+  const addTodo = (e) => {
     e.preventDefault();
-    if (!inputValue.trim()) return;
-
-    setTodos([
-      ...todos,
-      {
-        id: Date.now(),
-        text: inputValue,
-        completed: false,
-      },
-    ]);
-    setInputValue('');
+    if (!newTodo.trim()) return;
+    const newItem = { id: Date.now(), text: newTodo, completed: false };
+    setTodos([...todos, newItem]);
+    setNewTodo("");
   };
 
-  const handleToggleTodo = (id) => {
+  const toggleTodo = (id) => {
     setTodos(
       todos.map((todo) =>
         todo.id === id ? { ...todo, completed: !todo.completed } : todo
@@ -32,39 +23,43 @@ const TodoList = () => {
     );
   };
 
-  const handleDeleteTodo = (id) => {
+  const deleteTodo = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   return (
-    <div className="max-w-lg mx-auto p-6">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">Todo List</h1>
-      
-      <form onSubmit={handleAddTodo} className="flex gap-4 mb-6">
+    <div>
+      <h1>Todo List</h1>
+      <form onSubmit={addTodo}>
         <input
-          type="text"
-          value={inputValue}
-          onChange={handleInputChange}
           placeholder="Add a new todo"
-          className="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          aria-label="New todo input"
+          value={newTodo}
+          onChange={(e) => setNewTodo(e.target.value)}
         />
-        <button
-          type="submit"
-          className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-        >
-          Add
-        </button>
+        <button type="submit">Add</button>
       </form>
 
-      <ul className="space-y-3" role="list">
+      <ul>
         {todos.map((todo) => (
-          <TodoItem
+          <li
             key={todo.id}
-            todo={todo}
-            onToggle={handleToggleTodo}
-            onDelete={handleDeleteTodo}
-          />
+            data-testid={`todo-${todo.id}`}
+            onClick={() => toggleTodo(todo.id)}
+            style={{
+              textDecoration: todo.completed ? "line-through" : "none",
+              cursor: "pointer",
+            }}
+          >
+            {todo.text}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                deleteTodo(todo.id);
+              }}
+            >
+              Delete
+            </button>
+          </li>
         ))}
       </ul>
     </div>
