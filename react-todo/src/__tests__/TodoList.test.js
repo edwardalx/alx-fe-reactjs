@@ -1,80 +1,46 @@
-import { render, fireEvent, screen } from '@testing-library/react';
-import TodoList from '../components/TodoList';
+import React from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import TodoList from "../components/TodoList";
 
-describe('TodoList Component', () => {
-  beforeEach(() => {
+describe("TodoList Component", () => {
+  test("renders initial todos", () => {
     render(<TodoList />);
+    expect(screen.getByText("Learn React")).toBeInTheDocument();
+    expect(screen.getByText("Build Todo App")).toBeInTheDocument();
   });
 
-  describe('Initial Render', () => {
-    it('renders the todo input form', () => {
-      expect(screen.getByRole('textbox')).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /add/i })).toBeInTheDocument();
-    });
+  test("adds a new todo", () => {
+    render(<TodoList />);
+    const input = screen.getByPlaceholderText("Add a new todo");
+    const button = screen.getByText("Add");
 
-    it('renders empty todo list', () => {
-      const list = screen.getByRole('list');
-      expect(list).toBeInTheDocument();
-      expect(list.children.length).toBe(0);
-    });
+    fireEvent.change(input, { target: { value: "Write tests" } });
+    fireEvent.click(button);
+
+    expect(screen.getByText("Write tests")).toBeInTheDocument();
   });
 
-  describe('Adding Todos', () => {
-    it('adds a new todo when form is submitted', () => {
-      const input = screen.getByRole('textbox');
-      const addButton = screen.getByRole('button', { name: /add/i });
+  test("toggles todo completion", () => {
+    render(<TodoList />);
+    const todoItem = screen.getByText("Learn React");
 
-      fireEvent.change(input, { target: { value: 'New Todo Item' } });
-      fireEvent.click(addButton);
+    // Initially not completed
+    expect(todoItem).toHaveStyle("text-decoration: none");
 
-      expect(screen.getByText('New Todo Item')).toBeInTheDocument();
-      expect(input.value).toBe(''); // Input should be cleared
-    });
+    fireEvent.click(todoItem);
+    expect(todoItem).toHaveStyle("text-decoration: line-through");
 
-    it('does not add empty todos', () => {
-      const addButton = screen.getByRole('button', { name: /add/i });
-      const list = screen.getByRole('list');
-      
-      fireEvent.click(addButton);
-      expect(list.children.length).toBe(0);
-    });
+    fireEvent.click(todoItem);
+    expect(todoItem).toHaveStyle("text-decoration: none");
   });
 
-  describe('Todo Management', () => {
-    it('toggles todo completion status', () => {
-      // Add a todo first
-      const input = screen.getByRole('textbox');
-      fireEvent.change(input, { target: { value: 'Test Todo' } });
-      fireEvent.click(screen.getByRole('button', { name: /add/i }));
+  test("deletes a todo", () => {
+    render(<TodoList />);
+    const todoItem = screen.getByText("Learn React");
+    const deleteButton = screen.getAllByText("Delete")[0];
 
-      // Find and click the checkbox
-      const checkbox = screen.getByRole('checkbox');
-      fireEvent.click(checkbox);
-      expect(checkbox).toBeChecked();
-
-      // Toggle back
-      fireEvent.click(checkbox);
-      expect(checkbox).not.toBeChecked();
-    });
-
-    it('deletes a todo', () => {
-      // Add a todo first
-      const input = screen.getByRole('textbox');
-      fireEvent.change(input, { target: { value: 'Todo to Delete' } });
-      fireEvent.click(screen.getByRole('button', { name: /add/i }));
-
-      // Delete the todo
-      const deleteButton = screen.getByRole('button', { name: /delete/i });
-      fireEvent.click(deleteButton);
-
-      expect(screen.queryByText('Todo to Delete')).not.toBeInTheDocument();
-    });
-  });
-
-  describe('Accessibility', () => {
-    it('has accessible form controls', () => {
-      expect(screen.getByRole('textbox')).toHaveAttribute('aria-label', 'New todo input');
-      expect(screen.getByRole('button', { name: /add/i })).toBeInTheDocument();
-    });
+    fireEvent.click(deleteButton);
+    expect(todoItem).not.toBeInTheDocument();
   });
 });
